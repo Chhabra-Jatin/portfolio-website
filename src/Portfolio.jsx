@@ -90,7 +90,7 @@ export default function Portfolio() {
     {
       title: "Blog Application",
       tech: ["spring", "java", "mysql"],
-      github: "https://github.com/yourusername/blog-app",
+      github: "https://github.com/Chhabra-Jatin/blog-application",
       details: [
         "Built a robust RESTful API for blog application featuring POSTs, COMMENTS and CATEGORY management.",
         "Optimized REST APIs by introducing pagination and caching, reducing API response times by 60%.",
@@ -101,7 +101,7 @@ export default function Portfolio() {
     {
       title: "Food Order Application",
       tech: ["react", "firebase"],
-      github: "https://github.com/yourusername/food-app",
+      github: "https://github.com/Chhabra-Jatin/food-order-application",
       details: [
         "Developed a user-friendly web application for online food ordering.",
         "Implemented cart system, menu viewing, and order placement.",
@@ -109,18 +109,20 @@ export default function Portfolio() {
       ]
     },
     {
-      title: "Library Management System",
+      title: "Employee Data Management System",
       tech: ["react", "spring", "mysql"],
-      github: "https://github.com/yourusername/library-system",
+      github: "https://github.com/Chhabra-Jatin/employee-data-management/tree/master",
       details: [
-        "Enabled adding, updating, and retrieving book records.",
-        "Implemented email notifications for issues and reminders."
+        "A full-stack web application that allows users to manage employee records with ease.",
+        "Configured CORS to enable secure cross-origin communication between frontend and backend",
+        "Integrated with MySQL using Spring Data JPA for persistent employee data.",
+        "Communicates via RESTful APIs using Axios for HTTP requests from React to Spring Boot."
       ]
     },
     {
       title: "Warzone Game Development",
       tech: ["java"],
-      github: "https://github.com/yourusername/warzone-game",
+      github: "https://github.com/RancyKaur/WarzoneSOEN6441",
       details: [
         "Created multiplayer strategy game using OOP design patterns.",
         "Developed CLI interface with real-time game validation.",
@@ -178,7 +180,7 @@ export default function Portfolio() {
           <div className="flex gap-4">
             <a href="https://github.com/Chhabra-Jatin" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors duration-300"><Github /></a>
             <a href="https://linkedin.com/in/jatinchhabra1997" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors duration-300"><Linkedin /></a>
-            <a href="mailto:your@email.com" className="hover:text-blue-400 transition-colors duration-300"><Mail /></a>
+            <a href="mailto:jatin.chhabra772@gmail.com" className="hover:text-blue-400 transition-colors duration-300"><Mail /></a>
           </div>
         </div>
       </header>
