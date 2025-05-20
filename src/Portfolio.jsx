@@ -64,7 +64,8 @@ export default function Portfolio() {
 
   const experienceData = [
     {
-      title: "Cognizant (Dec. 2020 – Aug. 2023)",
+      title: "Cognizant",
+      duration: "Dec. 2020 – Aug. 2023",
       role: "Software Developer",
       details: [
         "Built and maintained RESTful API endpoints to support various functionalities and improve integration capabilities.",
@@ -76,7 +77,8 @@ export default function Portfolio() {
       ]
     },
     {
-      title: "Nugen IT Services (Jan. 2020 – Nov. 2020)",
+      title: "Nugen IT Services",
+      duration: "Jan. 2020 – Nov. 2020",
       role: "Frontend Developer",
       details: [
         "Built reusable React components and optimized frontend performance using React hooks and Redux for state management, improving application performance and reducing load times by 20%.",
@@ -146,7 +148,16 @@ export default function Portfolio() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#0f0f0f] text-white overflow-x-hidden font-sans text-[1.2rem] leading-relaxed">
+    <div className="relative min-h-screen bg-[#0f0f0f] text-white overflow-x-hidden font-sans text-[1.2rem] leading-relaxed" 
+    style={{
+        backgroundColor: '#000000',
+        backgroundImage: "url('/portfolio-website/bullseye-gradient.svg')",
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundAttachment: 'fixed',
+        backgroundPosition: 'center center'
+      }}>
+            
       <div className="absolute top-0 left-0 w-full h-screen pointer-events-none z-0">
         {techIcons.map(({ icon, x, y, delay }) => (
           <motion.img
@@ -205,27 +216,37 @@ export default function Portfolio() {
       </section>
 
       {/* Experience Section */}
-      <motion.section
-        ref={experienceRef}
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true, amount: 0.3 }}
-        className="px-6 py-24 max-w-7xl mx-auto"
-      >
-        <h2 className="text-5xl font-bold text-red-400 mb-12">Experience</h2>
-        {experienceData.map((exp, i) => (
-          <div key={i} className="mb-12">
-            <h3 className="text-2xl font-bold mb-1">{exp.title}</h3>
-            <p className="italic text-red-200 mb-4">{exp.role}</p>
-            <ul className="list-disc list-inside space-y-2 text-lg text-gray-300">
-              {exp.details.map((item, idx) => (
-                <li key={idx}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </motion.section>
+      <section id="experience" className="px-4 sm:px-6 lg:px-8 py-20 max-w-7xl mx-auto relative z-10">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-5xl font-bold text-red-400 mb-12"
+        >
+          Experience
+        </motion.h2>
+        <div className="space-y-12">
+          {experienceData.map((exp, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.2 }}
+              className="relative border-l-4 border-blue-500 pl-6"
+            >
+              <div className="absolute -left-[9px] top-1 w-5 h-5 bg-blue-500 rounded-full"></div>
+              <h3 className="text-xl font-bold text-white mb-1">{exp.title}</h3>
+              <p className="text-sm text-gray-400 mb-2 italic">{exp.duration} | {exp.role}</p>
+              <ul className="list-disc pl-5 text-gray-300 space-y-2">
+                {exp.details.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+      </section>
 
       {/* Projects Section */}
       <motion.section
@@ -242,7 +263,7 @@ export default function Portfolio() {
           {projects.map((project, i) => (
             <motion.div
               key={i}
-              className="relative h-64 group [perspective:1000px] rounded-xl shadow-lg border border-gray-700"
+              className="relative h-80 group rounded-2xl shadow-2xl border border-blue-700 bg-gradient-to-br from-[#000000] to-[#000000] overflow-hidden transform transition duration-500 hover:scale-[1.03] hover:shadow-blue-500/30"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
@@ -309,7 +330,7 @@ export default function Portfolio() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-gray-800/30 relative">
+      <section id="contact" className="py-20 relative">
         <div className="container mx-auto px-6 text-center">
           <motion.div
             initial={{ opacity: 0 }}
@@ -425,7 +446,7 @@ export default function Portfolio() {
       )}
 
       {/* Footer */}
-      <footer className="py-8 border-t border-gray-800 text-center">
+      <footer className="py-8 text-center">
         <div className="container mx-auto px-6">
           <p className="text-gray-400">
             &copy; {new Date().getFullYear()} [Jatin Chhabra]. All rights reserved.
