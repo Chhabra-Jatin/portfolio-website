@@ -206,9 +206,9 @@ export default function Portfolio() {
             I'm a <span ref={typedRef} className="text-blue-300 font-semibold"></span>
           </p>
           <a
-            href="/myresume.pdf"
+            href={`${import.meta.env.BASE_URL}JatinChhabra-resume.pdf`}
             download
-            className="inline-block mt-6 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white text-base sm:text-lg rounded-lg transition-all duration-300 shadow-md"
+            className="inline-block mt-6 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white text-base font-bold sm:text-lg rounded-lg transition-all duration-300 shadow-md"
           >
             Download Resume
           </a>
