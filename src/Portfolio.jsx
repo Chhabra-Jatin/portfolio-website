@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Typed from 'typed.js';
 import { Github, Linkedin, Mail } from "lucide-react";
+import { SiLeetcode } from "react-icons/si";
 import emailjs from 'emailjs-com';
 
 export default function Portfolio() {
@@ -15,6 +16,10 @@ export default function Portfolio() {
   const isSkillsInView = useInView(skillsRef, { margin: "-100px" });
   const isExperienceInView = useInView(experienceRef, { margin: "-100px" });
   const isProjectsInView = useInView(projectsRef, { margin: "-100px" });
+  const aboutRef = useRef(null);
+  const educationRef = useRef(null);
+  const isAboutInView = useInView(aboutRef, { once: false, margin: "-100px" });
+  const isEducationInView = useInView(educationRef, { once: false, margin: "-100px" });
 
   useEffect(() => {
     let typedInstance;
@@ -148,7 +153,7 @@ export default function Portfolio() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#0f0f0f] text-white overflow-x-hidden font-sans text-[1.2rem] leading-relaxed" 
+    <div className="relative min-h-screen bg-[#0f0f0f] text-white overflow-x-hidden poppins-medium text-[1.2rem] leading-relaxed" 
     style={{
         backgroundColor: '#000000',
         backgroundImage: "url('/portfolio-website/bullseye-gradient.svg')",
@@ -189,9 +194,10 @@ export default function Portfolio() {
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <h1 className="text-3xl font-extrabold text-blue-400 tracking-wide uppercase"></h1>
           <div className="flex gap-4">
-            <a href="https://github.com/Chhabra-Jatin" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors duration-300"><Github /></a>
-            <a href="https://linkedin.com/in/jatinchhabra1997" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors duration-300"><Linkedin /></a>
-            <a href="mailto:jatin.chhabra772@gmail.com" className="hover:text-blue-400 transition-colors duration-300"><Mail /></a>
+            <a href="https://github.com/Chhabra-Jatin" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors duration-300"><Github  size={30}/></a>
+            <a href="https://linkedin.com/in/jatinchhabra1997" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors duration-300"><Linkedin  size={30}/></a>
+            <a href="https://leetcode.com/u/jchhabra772/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors duration-300"><SiLeetcode size={30} /></a>
+            <a href="mailto:jatin.chhabra772@gmail.com" className="hover:text-blue-400 transition-colors duration-300"><Mail  size={30}/></a>
           </div>
         </div>
       </header>
@@ -215,38 +221,89 @@ export default function Portfolio() {
         </div>
       </section>
 
+
+    <section className="px-6 py-24 max-w-7xl mx-auto relative z-10 grid md:grid-cols-2 gap-x-24 gap-y-12 items-start">
+  {/* About Section */}
+  <motion.div
+    ref={aboutRef}
+    initial={{ opacity: 0, x: -50 }}
+    animate={isAboutInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+    transition={{ duration: 0.6 }}
+    className="space-y-6"
+  >
+    <h2 className="text-5xl font-bold text-blue-400 mb-6">About Me</h2>
+    <p className="text-gray-300 text-lg leading-relaxed">
+      I'm a passionate software developer with a strong foundation in computer science and hands-on experience building modern web applications. I specialize in crafting scalable, maintainable, and efficient software solutions using technologies like Java, Spring Boot, React, and AWS. With a keen eye for detail and a continuous learning mindset, I strive to write clean, performant code and deliver high-quality user experiences.
+    </p>
+    <p className="text-gray-300 text-lg leading-relaxed">
+      With over 2 years of professional experience, I have contributed to designing scalable APIs, implementing secure microservices, and developing modern front-end applications using ReactJS. I thrive on solving complex problems, building reliable software, and continuously improving my craft.
+    </p>
+  </motion.div>
+
+  {/* Education Section */}
+  <motion.div
+    ref={educationRef}
+    initial={{ opacity: 0, x: 50 }}
+    animate={isEducationInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+    transition={{ duration: 0.6 }}
+    className="space-y-12"
+  >
+    <h2 className="text-5xl font-bold text-red-400 mb-6">Education</h2>
+
+    <div className="relative border-l-4 border-blue-500 pl-6">
+      <div className="absolute -left-[9px] top-1 w-5 h-5 bg-blue-500 rounded-full"></div>
+      <h3 className="text-xl font-bold text-white mb-1">Concordia University</h3>
+      <p className="italic text-gray-400 mb-1">Sept. 2022 – June 2024</p>
+      <p className="text-gray-300 mb-1">Master's in Applied Computer Science</p>
+      <p className="text-gray-300">Montreal, Quebec, Canada</p>
+    </div>
+
+    <div className="relative border-l-4 border-blue-500 pl-6">
+      <div className="absolute -left-[9px] top-1 w-5 h-5 bg-blue-500 rounded-full"></div>
+      <h3 className="text-xl font-bold text-white mb-1">Guru Nanak Dev University</h3>
+      <p className="italic text-gray-400 mb-1">July 2016 – June 2020</p>
+      <p className="text-gray-300 mb-1">Bachelor of Technology in Computer Science and Engineering</p>
+      <p className="text-gray-300">Punjab, India</p>
+    </div>
+  </motion.div>
+</section>
+
       {/* Experience Section */}
       <section id="experience" className="px-4 sm:px-6 lg:px-8 py-20 max-w-7xl mx-auto relative z-10">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-5xl font-bold text-red-400 mb-12"
-        >
-          Experience
-        </motion.h2>
-        <div className="space-y-12">
-          {experienceData.map((exp, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.2 }}
-              className="relative border-l-4 border-blue-500 pl-6"
-            >
-              <div className="absolute -left-[9px] top-1 w-5 h-5 bg-blue-500 rounded-full"></div>
-              <h3 className="text-xl font-bold text-white mb-1">{exp.title}</h3>
-              <p className="text-sm text-gray-400 mb-2 italic">{exp.duration} | {exp.role}</p>
-              <ul className="list-disc pl-5 text-gray-300 space-y-2">
-                {exp.details.map((item, idx) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ul>
-            </motion.div>
+  <motion.h2
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: false, amount: 0.3 }}
+    transition={{ duration: 0.6 }}
+    className="text-5xl font-bold text-red-400 mb-12"
+  >
+    Experience
+  </motion.h2>
+
+  <div className="space-y-12">
+    {experienceData.map((exp, i) => (
+      <motion.div
+        key={i}
+        initial={{ opacity: 0, x: -80 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.7, ease: "easeOut", delay: i * 0.1 }}
+        className="relative border-l-4 border-blue-500 pl-6"
+      >
+        <div className="absolute -left-[9px] top-1 w-5 h-5 bg-blue-500 rounded-full"></div>
+
+        <h3 className="text-xl font-bold text-white mb-1">{exp.title}</h3>
+        <p className="text-sm text-gray-400 mb-2 italic">{exp.duration} | {exp.role}</p>
+        <ul className="list-disc pl-5 text-gray-300 space-y-2">
+          {exp.details.map((item, idx) => (
+            <li key={idx}>{item}</li>
           ))}
-        </div>
-      </section>
+        </ul>
+      </motion.div>
+    ))}
+  </div>
+</section>
+
 
       {/* Projects Section */}
       <motion.section
