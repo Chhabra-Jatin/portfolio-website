@@ -78,12 +78,12 @@ export default function Portfolio() {
         "Wrote unit tests and automated regression tests to ensure high-quality code, using JUnit and Mockito.",
         "Streamlined deployment processes by implementing DevOps automation and CI/CD pipelines using Jenkins, Git, and Nexus to automate builds and deployments, reducing deployment time from hours to minutes, for release reliability.",
         "Partnered with the product management team to gather requirements and actively participated in calls to address technical issues.",
-        "Analyzed and modified existing batch scripts to accommodate business rule changes."
+        " Ensured production batch scripts were up to date, efficient, and error-free, while meeting MetLife SLA requirements."
       ]
     },
     {
       title: "Nugen IT Services",
-      duration: "Jan. 2020 – Nov. 2020",
+      duration: "Aug. 2019 – Nov. 2020",
       role: "Frontend Developer",
       details: [
         "Built reusable React components and optimized frontend performance using React hooks and Redux for state management, improving application performance and reducing load times by 20%.",
@@ -110,9 +110,9 @@ export default function Portfolio() {
       tech: ["react", "firebase"],
       github: "https://github.com/Chhabra-Jatin/food-order-application",
       details: [
-        "Developed a user-friendly web application for online food ordering.",
-        "Implemented cart system, menu viewing, and order placement.",
-        "Used Firebase Realtime Database for seamless data management."
+        "Built a cloud-hosted web app for online ordering, integrating real-time database updates using Firebase.",
+        "Provides users with a seamless experience to view menus, select items, add meals to the cart, and place orders.",
+        "Leveraged Firebase Realtime Database to store and manage data efficiently."
       ]
     },
     {
@@ -132,8 +132,8 @@ export default function Portfolio() {
       github: "https://github.com/RancyKaur/WarzoneSOEN6441",
       details: [
         "Created multiplayer strategy game using OOP design patterns.",
-        "Developed CLI interface with real-time game validation.",
-        "Implemented save/load game state features with unit testing."
+        "Designed a user-friendly command-line interface for editing maps, managing gameplay, and issuing orders, with real-time validation and error feedback.",
+        "Maintained coding standards, architectural modularity, API documentation, and version control with continuous integration pipelines for automated builds and testing."
       ]
     }
   ];
@@ -236,7 +236,7 @@ export default function Portfolio() {
       I'm a passionate software developer with a strong foundation in computer science and hands-on experience building modern web applications. I specialize in crafting scalable, maintainable, and efficient software solutions using technologies like Java, Spring Boot, React, and AWS. With a keen eye for detail and a continuous learning mindset, I strive to write clean, performant code and deliver high-quality user experiences.
     </p>
     <p className="text-gray-300 text-lg leading-relaxed">
-      With over 2 years of professional experience, I have contributed to designing scalable APIs, implementing secure microservices, and developing modern front-end applications using ReactJS. I thrive on solving complex problems, building reliable software, and continuously improving my craft.
+      With 3 years of professional experience, I have contributed to designing scalable APIs, implementing secure microservices, and developing modern front-end applications using ReactJS. I thrive on solving complex problems, building reliable software, and continuously improving my craft.
     </p>
   </motion.div>
 
