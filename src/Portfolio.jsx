@@ -70,15 +70,16 @@ export default function Portfolio() {
   const experienceData = [
     {
       title: "Cognizant",
-      duration: "Dec. 2020 – Aug. 2023",
+      duration: "Dec. 2020 – Aug. 2022",
       role: "Software Developer",
       details: [
-        "Built and maintained RESTful API endpoints to support various functionalities and improve integration capabilities.",
+        "Built and maintained RESTful API endpoints using Java, Spring Boot, and Spring Data JPA, enabling seamless data exchange across microservices, improving data processing speed by 40%.",
         "Designed a role-based access control to enforce security policies across microservices, enhancing security and access control by 50%.",
         "Wrote unit tests and automated regression tests to ensure high-quality code, using JUnit and Mockito.",
         "Streamlined deployment processes by implementing DevOps automation and CI/CD pipelines using Jenkins, Git, and Nexus to automate builds and deployments, reducing deployment time from hours to minutes, for release reliability.",
         "Partnered with the product management team to gather requirements and actively participated in calls to address technical issues.",
-        " Ensured production batch scripts were up to date, efficient, and error-free, while meeting MetLife SLA requirements."
+        "Ensured production batch scripts were up to date, efficient, and error-free, while meeting MetLife SLA requirements.",
+        "Debugged and optimized production batch jobs to minimize failures and improve execution time for insurance workflows such as policy updates and claims processing."
       ]
     },
     {
@@ -86,9 +87,11 @@ export default function Portfolio() {
       duration: "Aug. 2019 – Nov. 2020",
       role: "Frontend Developer",
       details: [
+        "Integrated REST APIs with React frontend, enabling seamless data flow between backend services and UI components.",
         "Built reusable React components and optimized frontend performance using React hooks and Redux for state management, improving application performance and reducing load times by 20%.",
         "Developed responsive and intuitive user interfaces using React, Redux, and modern JavaScript frameworks, adhering to design thinking principles.",
-        "Implemented lazy loading and code splitting for improved page load speed."
+        "Implemented lazy loading and code splitting for improved page load speed.",
+        "Worked closely with designers and backend developers to deliver user-centric features with pixel-perfect UI implementation."
       ]
     }
   ];
@@ -140,8 +143,10 @@ export default function Portfolio() {
 
   const skills = [
     { label: "Java", percent: 90 },
+    { label: "C++", percent: 90 },
     { label: "SpringBoot", percent: 85 },
-    { label: "SQL", percent: 90 },
+    { label: "MySQL", percent: 90 },
+    { label: "MongoDB", percent: 90 },
     { label: "JavaScript", percent: 90 },
     { label: "ReactJS", percent: 85 },
     { label: "AWS", percent: 60 },
@@ -231,7 +236,7 @@ export default function Portfolio() {
     transition={{ duration: 0.6 }}
     className="space-y-6"
   >
-    <h2 className="text-5xl font-bold text-blue-400 mb-6">About Me</h2>
+    <h2 className="text-5xl font-bold text-red-400 mb-6">About Me</h2>
     <p className="text-gray-300 text-lg leading-relaxed">
       I'm a passionate software developer with a strong foundation in computer science and hands-on experience building modern web applications. I specialize in crafting scalable, maintainable, and efficient software solutions using technologies like Java, Spring Boot, React, and AWS. With a keen eye for detail and a continuous learning mindset, I strive to write clean, performant code and deliver high-quality user experiences.
     </p>
@@ -251,7 +256,7 @@ export default function Portfolio() {
     <h2 className="text-5xl font-bold text-red-400 mb-6">Education</h2>
 
     <div className="relative border-l-4 border-blue-500 pl-6">
-      <div className="absolute -left-[9px] top-1 w-5 h-5 bg-blue-500 rounded-full"></div>
+      <div className="absolute -left-[9px] top-0 w-5 h-5 bg-blue-500 rounded-full"></div>
       <h3 className="text-xl font-bold text-white mb-1">Concordia University</h3>
       <p className="italic text-gray-400 mb-1">Sept. 2022 – June 2024</p>
       <p className="text-gray-300 mb-1">Master's in Applied Computer Science</p>
@@ -259,7 +264,7 @@ export default function Portfolio() {
     </div>
 
     <div className="relative border-l-4 border-blue-500 pl-6">
-      <div className="absolute -left-[9px] top-1 w-5 h-5 bg-blue-500 rounded-full"></div>
+      <div className="absolute -left-[9px] top-0 w-5 h-5 bg-blue-500 rounded-full"></div>
       <h3 className="text-xl font-bold text-white mb-1">Guru Nanak Dev University</h3>
       <p className="italic text-gray-400 mb-1">July 2016 – June 2020</p>
       <p className="text-gray-300 mb-1">Bachelor of Technology in Computer Science and Engineering</p>
@@ -290,7 +295,7 @@ export default function Portfolio() {
         transition={{ duration: 0.7, ease: "easeOut", delay: i * 0.1 }}
         className="relative border-l-4 border-blue-500 pl-6"
       >
-        <div className="absolute -left-[9px] top-1 w-5 h-5 bg-blue-500 rounded-full"></div>
+        <div className="absolute -left-[9px] top-0 w-5 h-5 bg-blue-500 rounded-full"></div>
 
         <h3 className="text-xl font-bold text-white mb-1">{exp.title}</h3>
         <p className="text-sm text-gray-400 mb-2 italic">{exp.duration} | {exp.role}</p>
@@ -314,7 +319,7 @@ export default function Portfolio() {
         viewport={{ once: true, amount: 0.3 }}
         className="px-6 py-24 max-w-7xl mx-auto"
       >
-        <h2 className="text-5xl font-bold text-blue-400 mb-12">Projects</h2>
+        <h2 className="text-5xl font-bold text-red-400 mb-12">Projects</h2>
 
         <div className="grid md:grid-cols-2 gap-12">
           {projects.map((project, i) => (
@@ -365,7 +370,7 @@ export default function Portfolio() {
 
       {/* Skills Section */}
       <section className="px-6 py-24 max-w-7xl mx-auto" ref={skillsRef}>
-        <h2 className="text-5xl font-bold text-blue-400 mb-12">Skillset</h2>
+        <h2 className="text-5xl font-bold text-red-400 mb-12">Skillset</h2>
         <div className="grid md:grid-cols-2 gap-x-16 gap-y-6">
           {skills.map((skill, i) => (
             <div key={i} className="flex justify-between items-center">
@@ -396,7 +401,7 @@ export default function Portfolio() {
             transition={{ duration: 0.6 }}
             className="max-w-2xl mx-auto"
           >
-            <h2 className="text-4xl sm:text-5xl font-bold text-blue-400 mb-6">
+            <h2 className="text-4xl sm:text-5xl font-bold text-red-400 mb-6">
               Get in Touch
             </h2>
             <p className="text-xl text-gray-300 mb-8">
