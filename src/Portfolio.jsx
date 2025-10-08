@@ -20,6 +20,13 @@ export default function Portfolio() {
   const educationRef = useRef(null);
   const isAboutInView = useInView(aboutRef, { once: false, margin: "-100px" });
   const isEducationInView = useInView(educationRef, { once: false, margin: "-100px" });
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    return localStorage.getItem('theme') === 'light' ? false : true;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+  }, [isDarkMode]);
 
   useEffect(() => {
     let typedInstance;
@@ -85,7 +92,7 @@ export default function Portfolio() {
     {
       title: "Nugen IT Services",
       duration: "Aug. 2019 – Nov. 2020",
-      role: "Frontend Developer",
+      role: "Web Developer",
       details: [
         "Integrated REST APIs with React frontend, enabling seamless data flow between backend services and UI components.",
         "Built reusable React components and optimized frontend performance using React hooks and Redux for state management, improving application performance and reducing load times by 20%.",
@@ -158,16 +165,23 @@ export default function Portfolio() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#0f0f0f] text-white overflow-x-hidden poppins-medium text-[1.2rem] leading-relaxed" 
-    style={{
-        backgroundColor: '#000000',
-        backgroundImage: "url('/portfolio-website/bullseye-gradient.svg')",
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundAttachment: 'fixed',
-        backgroundPosition: 'center center'
-      }}>
-            
+    <div className={`relative min-h-screen overflow-x-hidden poppins-medium text-[1.2rem] leading-relaxed transition-colors duration-500 ${
+        isDarkMode
+            ? "bg-[#0f0f0f] text-white"
+            : "bg-white text-black"
+        }`}
+        style={{
+            backgroundColor: isDarkMode ? '#000000' : '#f7f7f7',
+            backgroundImage: isDarkMode
+            ? "url('/portfolio-website/bullseye-gradient.svg')"
+            : "none",
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            backgroundAttachment: 'fixed',
+            backgroundPosition: 'center center'
+        }}
+    >
+           
       <div className="absolute top-0 left-0 w-full h-screen pointer-events-none z-0">
         {techIcons.map(({ icon, x, y, delay }) => (
           <motion.img
@@ -195,14 +209,31 @@ export default function Portfolio() {
       </div>
 
       {/* Header */}
-      <header className="fixed w-full bg-[#0f0f0f]/70 backdrop-blur-md text-white z-50 shadow-lg border-b border-gray-800">
+      <header className="fixed w-full bg-black backdrop-blur-md text-white z-50 shadow-lg border-b border-black">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <h1 className="text-3xl font-extrabold text-blue-400 tracking-wide uppercase"></h1>
-          <div className="flex gap-4">
+          <div className="flex gap-4 items-center justify-center">
             <a href="https://github.com/Chhabra-Jatin" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors duration-300"><Github  size={30}/></a>
             <a href="https://linkedin.com/in/jatinchhabra1997" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors duration-300"><Linkedin  size={30}/></a>
             <a href="https://leetcode.com/u/jchhabra772/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors duration-300"><SiLeetcode size={30} /></a>
             <a href="mailto:jatin.chhabra772@gmail.com" className="hover:text-blue-400 transition-colors duration-300"><Mail  size={30}/></a>
+            <button
+                onClick={() => setIsDarkMode(!isDarkMode)}
+                className={`p-1 rounded-lg border-2 transition-colors duration-300
+                    ${isDarkMode ? 'border-yellow-400 hover:border-yellow-300' : 'border-gray-800 hover:border-blue-400'}`}
+                title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+            >
+                {isDarkMode ? (
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-6 h-6 text-yellow-400">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1.5M12 19.5V21m8.485-8.485h-1.5M4.515 12H3m13.364 7.364l-1.06-1.06M7.697 7.697l-1.06-1.06m0 10.727l1.06-1.06m7.607-7.607l1.06-1.06M12 8.25a3.75 3.75 0 110 7.5 3.75 3.75 0 010-7.5z" />
+                </svg>
+                ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-6 h-6 text-gray-300">
+                <path d="M21.64 13.65A9 9 0 0110.35 2.36a9 9 0 1011.29 11.29z" />
+                </svg>
+                )}
+            </button>
+
           </div>
         </div>
       </header>
@@ -210,11 +241,22 @@ export default function Portfolio() {
       {/* Intro Section */}
       <section className="min-h-screen flex items-center justify-center text-center px-4 relative z-10">
         <div>
-          <h2 className="text-6xl sm:text-7xl font-extrabold mb-6 text-blue-400 leading-tight tracking-tight">
-            Hi, I'm <span className="text-white">Jatin Chhabra</span>
+          <h2
+            className={`text-6xl sm:text-7xl font-extrabold mb-6 leading-tight tracking-tight transition-colors duration-500 ${
+                isDarkMode ? "text-blue-400" : "text-blue-600"
+            }`}
+          >
+            Hi, I'm{" "}
+            <span className={isDarkMode ? "text-white" : "text-black"}>
+                Jatin Chhabra
+            </span>
           </h2>
-          <p className="text-3xl md:text-4xl text-gray-300 font-semibold">
-            I'm a <span ref={typedRef} className="text-blue-300 font-semibold"></span>
+          <p
+            className={`text-3xl md:text-4xl font-semibold transition-colors duration-500 ${
+            isDarkMode ? "text-gray-300" : "text-gray-700"
+            }`}
+          >
+            I'm a <span ref={typedRef} className="text-blue-400 font-semibold"></span>
           </p>
           <a
             href={`${import.meta.env.BASE_URL}JatinChhabra-resume.pdf`}
@@ -237,10 +279,18 @@ export default function Portfolio() {
     className="space-y-6"
   >
     <h2 className="text-5xl font-bold text-red-400 mb-6">About Me</h2>
-    <p className="text-gray-300 text-lg leading-relaxed">
+    <p
+        className={`text-lg leading-relaxed transition-colors duration-500 ${
+            isDarkMode ? "text-gray-300" : "text-gray-800"
+        }`}
+    >
       I'm a passionate software developer with a strong foundation in computer science and hands-on experience building modern web applications. I specialize in crafting scalable, maintainable, and efficient software solutions using technologies like Java, Spring Boot, React, and AWS. With a keen eye for detail and a continuous learning mindset, I strive to write clean, performant code and deliver high-quality user experiences.
     </p>
-    <p className="text-gray-300 text-lg leading-relaxed">
+    <p
+        className={`text-lg leading-relaxed transition-colors duration-500 ${
+            isDarkMode ? "text-gray-300" : "text-gray-800"
+        }`}
+    >
       With 3 years of professional experience, I have contributed to designing scalable APIs, implementing secure microservices, and developing modern front-end applications using ReactJS. I thrive on solving complex problems, building reliable software, and continuously improving my craft.
     </p>
   </motion.div>
@@ -257,18 +307,59 @@ export default function Portfolio() {
 
     <div className="relative border-l-4 border-blue-500 pl-6">
       <div className="absolute -left-[9px] top-0 w-5 h-5 bg-blue-500 rounded-full"></div>
-      <h3 className="text-xl font-bold text-white mb-1">Concordia University</h3>
-      <p className="italic text-gray-400 mb-1">Sept. 2022 – June 2024</p>
-      <p className="text-gray-300 mb-1">Master's in Applied Computer Science</p>
-      <p className="text-gray-300">Montreal, Quebec, Canada</p>
+      <h3 className={`text-xl font-bold mb-1 transition-colors duration-500 ${
+        isDarkMode ? "text-white" : "text-gray-900"
+        }`}
+      > Concordia University
+      </h3>
+      <p
+        className={`italic mb-1 transition-colors duration-500 ${
+            isDarkMode ? "text-gray-400" : "text-gray-600"
+        }`}
+      > Sept. 2022 – June 2024
+      </p>
+      <p
+        className={`mb-1 transition-colors duration-500 ${
+            isDarkMode ? "text-gray-300" : "text-gray-700"
+        }`}
+      > Master's in Applied Computer Science
+      </p>
+      <p
+        className={`transition-colors duration-500 ${
+            isDarkMode ? "text-gray-300" : "text-gray-700"
+        }`}
+      > Montreal, Quebec, Canada
+      </p>
     </div>
 
     <div className="relative border-l-4 border-blue-500 pl-6">
       <div className="absolute -left-[9px] top-0 w-5 h-5 bg-blue-500 rounded-full"></div>
-      <h3 className="text-xl font-bold text-white mb-1">Guru Nanak Dev University</h3>
-      <p className="italic text-gray-400 mb-1">July 2016 – June 2020</p>
-      <p className="text-gray-300 mb-1">Bachelor of Technology in Computer Science and Engineering</p>
-      <p className="text-gray-300">Punjab, India</p>
+      <h3 className={`text-xl font-bold mb-1 transition-colors duration-500 ${
+        isDarkMode ? "text-white" : "text-gray-900"
+        }`}
+      >  Guru Nanak Dev University
+      </h3>
+      <p
+        className={`italic mb-1 transition-colors duration-500 ${
+            isDarkMode ? "text-gray-400" : "text-gray-600"
+        }`}
+      >
+        July 2016 – June 2020
+      </p>
+      <p
+        className={`mb-1 transition-colors duration-500 ${
+            isDarkMode ? "text-gray-300" : "text-gray-700"
+        }`}
+      >
+        Bachelor of Technology in Computer Science and Engineering
+      </p>
+      <p
+        className={`transition-colors duration-500 ${
+            isDarkMode ? "text-gray-300" : "text-gray-700"
+        }`}
+      >
+        Punjab, India
+      </p>
     </div>
   </motion.div>
 </section>
@@ -297,12 +388,27 @@ export default function Portfolio() {
       >
         <div className="absolute -left-[9px] top-0 w-5 h-5 bg-blue-500 rounded-full"></div>
 
-        <h3 className="text-xl font-bold text-white mb-1">{exp.title}</h3>
-        <p className="text-sm text-gray-400 mb-2 italic">{exp.duration} | {exp.role}</p>
-        <ul className="list-disc pl-5 text-gray-300 space-y-2">
-          {exp.details.map((item, idx) => (
-            <li key={idx}>{item}</li>
-          ))}
+        <h3 className={`text-xl font-bold mb-1 transition-colors duration-500 ${
+            isDarkMode ? "text-white" : "text-gray-900"
+            }`}
+        >
+            {exp.title}
+        </h3>
+
+        <p className={`text-sm mb-2 italic transition-colors duration-500 ${
+            isDarkMode ? "text-gray-400" : "text-gray-600"
+        }`}
+        >
+            {exp.duration} | {exp.role}
+        </p>
+
+        <ul className={`list-disc pl-5 space-y-2 transition-colors duration-500 ${
+            isDarkMode ? "text-gray-300" : "text-gray-700"
+        }`}
+        >
+            {exp.details.map((item, idx) => (
+                <li key={idx}>{item}</li>
+            ))}
         </ul>
       </motion.div>
     ))}
@@ -322,50 +428,67 @@ export default function Portfolio() {
         <h2 className="text-5xl font-bold text-red-400 mb-12">Projects</h2>
 
         <div className="grid md:grid-cols-2 gap-12">
-          {projects.map((project, i) => (
+        {projects.map((project, i) => (
             <motion.div
-              key={i}
-              className="relative h-80 group rounded-2xl shadow-2xl border border-blue-700 bg-gradient-to-br from-[#000000] to-[#000000] overflow-hidden transform transition duration-500 hover:scale-[1.03] hover:shadow-blue-500/30"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              viewport={{ once: true, amount: 0.3 }}
+            key={i}
+            className={`relative h-80 group rounded-2xl shadow-2xl border overflow-hidden transform transition duration-500 hover:scale-[1.03] ${
+                isDarkMode
+                ? 'border-blue-700 bg-gradient-to-br from-[#000000] to-[#000000] hover:shadow-blue-500/30'
+                : 'border-gray-300 bg-gradient-to-br from-white to-gray-100 hover:shadow-gray-400/30'
+            }`}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: i * 0.1 }}
+            viewport={{ once: true, amount: 0.3 }}
             >
-              <div className="absolute inset-0 transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
-                <div className="absolute inset-0 p-6 backface-hidden overflow-hidden">
-                  <h3 className="text-2xl font-bold mb-2 flex items-center gap-2">
+            <div className="absolute inset-0 transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                <div
+                className={`absolute inset-0 p-6 backface-hidden overflow-hidden ${
+                    isDarkMode ? '' : 'text-gray-800'
+                }`}
+                >
+                <h3 className={`text-2xl font-bold mb-2 flex items-center gap-2 ${isDarkMode ? 'text-white' : 'text-black'}`}>
                     {project.title}
                     {project.tech.map(tech => (
-                      <img
+                    <img
                         key={tech}
                         src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${tech}/${tech}-original.svg`}
                         alt={tech}
                         className="h-6 w-6"
-                      />
+                    />
                     ))}
-                  </h3>
-                  <ul className="list-disc list-inside space-y-3 text-lg text-gray-300">
+                </h3>
+                <ul className={`list-disc list-inside space-y-3 text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                     {project.details.map((detail, j) => (
-                      <li key={j} className="truncate hover:whitespace-normal">{detail}</li>
+                    <li key={j} className="truncate hover:whitespace-normal">{detail}</li>
                     ))}
-                  </ul>
+                </ul>
                 </div>
-                <div className="absolute inset-0 bg-black/80 text-center flex flex-col items-center justify-center backface-hidden [transform:rotateY(180deg)]">
-                  <motion.a
+                <div
+                className={`absolute inset-0 text-center flex flex-col items-center justify-center backface-hidden [transform:rotateY(180deg)] ${
+                    isDarkMode ? 'bg-black/80' : 'bg-white/80'
+                }`}
+                >
+                    <motion.a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition duration-300"
-                  >
+                    className={`px-6 py-3 rounded-lg font-semibold shadow-lg transition duration-300 ${
+                        isDarkMode
+                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                        : 'bg-blue-500 hover:bg-blue-600 text-white' // text is always white
+                    }`}
+                    >
                     View Code on GitHub
-                  </motion.a>
+                    </motion.a>
                 </div>
-              </div>
+            </div>
             </motion.div>
-          ))}
+        ))}
         </div>
+
       </motion.section>
 
       {/* Skills Section */}
@@ -374,18 +497,34 @@ export default function Portfolio() {
         <div className="grid md:grid-cols-2 gap-x-16 gap-y-6">
           {skills.map((skill, i) => (
             <div key={i} className="flex justify-between items-center">
-              <span className="text-lg font-medium text-white w-48">{skill.label}</span>
+              <span className={`text-lg font-medium w-48 ${
+                isDarkMode ? "text-white" : "text-gray-900"
+                }`}
+              >
+                {skill.label}
+              </span>
               <div className="flex-1 ml-4">
-                <div className="relative w-full h-3 bg-gray-700 rounded-full overflow-hidden">
-                  <motion.div
+                <div
+                    className={`relative w-full h-3 rounded-full overflow-hidden border border-black ${
+                    !isDarkMode ? 'bg-white' : 'bg-gray-700'
+                    }`}
+                >
+                    <motion.div
                     initial={{ width: 0 }}
                     animate={isSkillsInView ? { width: `${skill.percent}%` } : {}}
                     transition={{ duration: 1.5, ease: "easeOut", delay: i * 0.1 }}
-                    className="absolute top-0 left-0 h-3 bg-blue-500 rounded-full"
-                  ></motion.div>
+                    className={`absolute top-0 left-0 h-3 rounded-full ${
+                        !isDarkMode ? 'bg-blue-700' : 'bg-blue-500'
+                    }`}
+                    ></motion.div>
                 </div>
               </div>
-              <span className="ml-4 text-sm text-gray-300 font-semibold">{skill.percent}%</span>
+              <span className={`ml-4 text-sm font-semibold ${
+                isDarkMode ? "text-gray-300" : "text-gray-800"
+                }`}
+              >
+                {skill.percent}%
+              </span>
             </div>
           ))}
         </div>
@@ -404,8 +543,11 @@ export default function Portfolio() {
             <h2 className="text-4xl sm:text-5xl font-bold text-red-400 mb-6">
               Get in Touch
             </h2>
-            <p className="text-xl text-gray-300 mb-8">
-              Have a project in mind or want to discuss potential opportunities? I'd love to hear from you!
+            <p className={`text-xl mb-8 transition-colors duration-500 ${
+                isDarkMode ? "text-gray-300" : "text-gray-800"
+                }`}
+            >
+                Have a project in mind or want to discuss potential opportunities? I'd love to hear from you!
             </p>
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: "0 5px 15px rgba(37, 99, 235, 0.4)" }}
@@ -510,8 +652,11 @@ export default function Portfolio() {
       {/* Footer */}
       <footer className="py-8 text-center">
         <div className="container mx-auto px-6">
-          <p className="text-gray-400">
-            &copy; {new Date().getFullYear()} [Jatin Chhabra]. All rights reserved.
+          <p className={`transition-colors duration-500 ${
+            isDarkMode ? "text-gray-400" : "text-gray-700"
+            }`}
+            >
+                &copy; {new Date().getFullYear()} [Jatin Chhabra]. All rights reserved.
           </p>
         </div>
       </footer>
