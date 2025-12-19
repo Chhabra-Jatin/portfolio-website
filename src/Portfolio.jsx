@@ -1,13 +1,17 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import Typed from 'typed.js';
+import { useState, useEffect, useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import Typed from "typed.js";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { SiLeetcode } from "react-icons/si";
-import emailjs from 'emailjs-com';
+import emailjs from "emailjs-com";
 
 export default function Portfolio() {
   const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
   const typedRef = useRef(null);
   const modalRef = useRef(null);
   const skillsRef = useRef(null);
@@ -19,26 +23,29 @@ export default function Portfolio() {
   const aboutRef = useRef(null);
   const educationRef = useRef(null);
   const isAboutInView = useInView(aboutRef, { once: false, margin: "-100px" });
-  const isEducationInView = useInView(educationRef, { once: false, margin: "-100px" });
+  const isEducationInView = useInView(educationRef, {
+    once: false,
+    margin: "-100px",
+  });
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    return localStorage.getItem('theme') === 'light' ? false : true;
+    return localStorage.getItem("theme") === "light" ? false : true;
   });
 
   useEffect(() => {
-    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
   }, [isDarkMode]);
 
   useEffect(() => {
     let typedInstance;
     if (typedRef.current) {
       typedInstance = new Typed(typedRef.current, {
-        strings: ['Software Developer', 'Problem Solver'],
+        strings: ["Software Developer", "Problem Solver"],
         typeSpeed: 50,
         backSpeed: 30,
         backDelay: 1500,
         loop: true,
         showCursor: true,
-        cursorChar: '|'
+        cursorChar: "|",
       });
     }
     return () => typedInstance?.destroy();
@@ -46,23 +53,32 @@ export default function Portfolio() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    emailjs.send('service_wy5bmoi', 'template_xte2q15', formData, '-bKs_FcAEJPR75lKh')
-      .then((result) => {
-        console.log('Email sent successfully:', result.text);
-        alert("Message sent successfully!");
-      }, (error) => {
-        console.error('Email sending failed:', error.text);
-        alert("Failed to send message. Please try again.");
-      });
+    emailjs
+      .send(
+        "service_wy5bmoi",
+        "template_xte2q15",
+        formData,
+        "-bKs_FcAEJPR75lKh"
+      )
+      .then(
+        (result) => {
+          console.log("Email sent successfully:", result.text);
+          alert("Message sent successfully!");
+        },
+        (error) => {
+          console.error("Email sending failed:", error.text);
+          alert("Failed to send message. Please try again.");
+        }
+      );
 
     setShowModal(false);
-    setFormData({ name: '', email: '', message: '' });
+    setFormData({ name: "", email: "", message: "" });
   };
 
   const techIcons = [
@@ -71,7 +87,7 @@ export default function Portfolio() {
     { icon: "javascript", x: 25, y: 70, delay: 0.7 },
     { icon: "spring", x: 70, y: 75, delay: 0.7 },
     { icon: "html5", x: 10, y: 40, delay: 0.7 },
-    { icon: "css3", x: 80, y: 50, delay: 0.7 }
+    { icon: "css3", x: 80, y: 50, delay: 0.7 },
   ];
 
   const experienceData = [
@@ -86,8 +102,8 @@ export default function Portfolio() {
         "Streamlined deployment processes by implementing DevOps automation and CI/CD pipelines using Jenkins, Git, and Nexus to automate builds and deployments, reducing deployment time from hours to minutes, for release reliability.",
         "Partnered with the product management team to gather requirements and actively participated in calls to address technical issues.",
         "Ensured production batch scripts were up to date, efficient, and error-free, while meeting MetLife SLA requirements.",
-        "Debugged and optimized production batch jobs to minimize failures and improve execution time for insurance workflows such as policy updates and claims processing."
-      ]
+        "Debugged and optimized production batch jobs to minimize failures and improve execution time for insurance workflows such as policy updates and claims processing.",
+      ],
     },
     {
       title: "Nugen IT Services",
@@ -98,12 +114,26 @@ export default function Portfolio() {
         "Built reusable React components and optimized frontend performance using React hooks and Redux for state management, improving application performance and reducing load times by 20%.",
         "Developed responsive and intuitive user interfaces using React, Redux, and modern JavaScript frameworks, adhering to design thinking principles.",
         "Implemented lazy loading and code splitting for improved page load speed.",
-        "Worked closely with designers and backend developers to deliver user-centric features with pixel-perfect UI implementation."
-      ]
-    }
+        "Worked closely with designers and backend developers to deliver user-centric features with pixel-perfect UI implementation.",
+      ],
+    },
   ];
 
   const projects = [
+    {
+      title: "BlogPost",
+      tech: ["react", "redux", "firebase"],
+      demo: "https://shareyourblogs.netlify.app/",
+      github: "https://github.com/Chhabra-Jatin/blogpost",
+      details: [
+        "Built a full-stack blogging application using React and Firebase Firestore with real-time data synchronization.",
+        "Implemented Google Authentication with Firebase Auth for secure login/logout and user-specific actions.",
+        "Designed Create, Edit, and Delete post functionality with role-based access (only authors can modify their posts).",
+        "Developed a Like/Dislike system with per-user tracking, live counters, and instant UI updates using optimistic rendering.",
+        "Enabled real-time updates across users using Firestore onSnapshot, eliminating manual refreshes.",
+        "Added advanced post sorting (Newest, Oldest, Most Liked) with stable tie-break logic for consistent UX."
+      ],
+    },
     {
       title: "Blog Application",
       tech: ["spring", "java", "mysql"],
@@ -112,8 +142,8 @@ export default function Portfolio() {
         "Built a robust RESTful API for blog application featuring POSTs, COMMENTS and CATEGORY management.",
         "Optimized REST APIs by introducing pagination and caching, reducing API response times by 60%.",
         "Integrated authentication and authorization mechanisms to ensure secure access to the API endpoints.",
-        "Utilized Spring Security for role-based access control, enforcing permissions for different user roles."
-      ]
+        "Utilized Spring Security for role-based access control, enforcing permissions for different user roles.",
+      ],
     },
     {
       title: "Food Order Application",
@@ -122,19 +152,20 @@ export default function Portfolio() {
       details: [
         "Built a cloud-hosted web app for online ordering, integrating real-time database updates using Firebase.",
         "Provides users with a seamless experience to view menus, select items, add meals to the cart, and place orders.",
-        "Leveraged Firebase Realtime Database to store and manage data efficiently."
-      ]
+        "Leveraged Firebase Realtime Database to store and manage data efficiently.",
+      ],
     },
     {
       title: "Employee Data Management System",
       tech: ["react", "spring", "mysql"],
-      github: "https://github.com/Chhabra-Jatin/employee-data-management/tree/master",
+      github:
+        "https://github.com/Chhabra-Jatin/employee-data-management/tree/master",
       details: [
         "A full-stack web application that allows users to manage employee records with ease.",
         "Configured CORS to enable secure cross-origin communication between frontend and backend",
         "Integrated with MySQL using Spring Data JPA for persistent employee data.",
-        "Communicates via RESTful APIs using Axios for HTTP requests from React to Spring Boot."
-      ]
+        "Communicates via RESTful APIs using Axios for HTTP requests from React to Spring Boot.",
+      ],
     },
     {
       title: "Warzone Game Development",
@@ -143,9 +174,9 @@ export default function Portfolio() {
       details: [
         "Created multiplayer strategy game using OOP design patterns.",
         "Designed a user-friendly command-line interface for editing maps, managing gameplay, and issuing orders, with real-time validation and error feedback.",
-        "Maintained coding standards, architectural modularity, API documentation, and version control with continuous integration pipelines for automated builds and testing."
-      ]
-    }
+        "Maintained coding standards, architectural modularity, API documentation, and version control with continuous integration pipelines for automated builds and testing.",
+      ],
+    },
   ];
 
   const skills = [
@@ -161,27 +192,25 @@ export default function Portfolio() {
     { label: "Python", percent: 70 },
     { label: "JUnit", percent: 75 },
     { label: "Git", percent: 70 },
-    { label: "Docker & Kubernetes", percent: 50 }
+    { label: "Docker & Kubernetes", percent: 50 },
   ];
 
   return (
-    <div className={`relative min-h-screen overflow-x-hidden poppins-medium text-[1.2rem] leading-relaxed transition-colors duration-500 ${
-        isDarkMode
-            ? "bg-[#0f0f0f] text-white"
-            : "bg-white text-black"
-        }`}
-        style={{
-            backgroundColor: isDarkMode ? '#000000' : '#f7f7f7',
-            backgroundImage: isDarkMode
-            ? "url('/portfolio-website/bullseye-gradient.svg')"
-            : "none",
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            backgroundAttachment: 'fixed',
-            backgroundPosition: 'center center'
-        }}
+    <div
+      className={`relative min-h-screen overflow-x-hidden poppins-medium text-[1.2rem] leading-relaxed transition-colors duration-500 ${
+        isDarkMode ? "bg-[#0f0f0f] text-white" : "bg-white text-black"
+      }`}
+      style={{
+        backgroundColor: isDarkMode ? "#000000" : "#f7f7f7",
+        backgroundImage: isDarkMode
+          ? "url('/portfolio-website/bullseye-gradient.svg')"
+          : "none",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed",
+        backgroundPosition: "center center",
+      }}
     >
-           
       <div className="absolute top-0 left-0 w-full h-screen pointer-events-none z-0">
         {techIcons.map(({ icon, x, y, delay }) => (
           <motion.img
@@ -195,14 +224,14 @@ export default function Portfolio() {
               opacity: [0.3, 1, 0.3],
               scale: [1, 1.45, 1],
               x: [0, Math.random() * 30 - 10, 0],
-              y: [0, Math.random() * 30 - 10, 0]
+              y: [0, Math.random() * 30 - 10, 0],
             }}
             transition={{
               duration: 4 + Math.random() * 2,
               repeat: Infinity,
               repeatType: "reverse",
               ease: "easeInOut",
-              delay
+              delay,
             }}
           />
         ))}
@@ -213,27 +242,74 @@ export default function Portfolio() {
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <h1 className="text-3xl font-extrabold text-blue-400 tracking-wide uppercase"></h1>
           <div className="flex gap-4 items-center justify-center">
-            <a href="https://github.com/Chhabra-Jatin" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors duration-300"><Github  size={30}/></a>
-            <a href="https://linkedin.com/in/jatinchhabra1997" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors duration-300"><Linkedin  size={30}/></a>
-            <a href="https://leetcode.com/u/jchhabra772/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors duration-300"><SiLeetcode size={30} /></a>
-            <a href="mailto:jatin.chhabra772@gmail.com" className="hover:text-blue-400 transition-colors duration-300"><Mail  size={30}/></a>
-            <button
-                onClick={() => setIsDarkMode(!isDarkMode)}
-                className={`p-1 rounded-lg border-2 transition-colors duration-300
-                    ${isDarkMode ? 'border-yellow-400 hover:border-yellow-300' : 'border-gray-800 hover:border-blue-400'}`}
-                title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+            <a
+              href="https://github.com/Chhabra-Jatin"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-400 transition-colors duration-300"
             >
-                {isDarkMode ? (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-6 h-6 text-yellow-400">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1.5M12 19.5V21m8.485-8.485h-1.5M4.515 12H3m13.364 7.364l-1.06-1.06M7.697 7.697l-1.06-1.06m0 10.727l1.06-1.06m7.607-7.607l1.06-1.06M12 8.25a3.75 3.75 0 110 7.5 3.75 3.75 0 010-7.5z" />
+              <Github size={30} />
+            </a>
+            <a
+              href="https://linkedin.com/in/jatinchhabra1997"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-400 transition-colors duration-300"
+            >
+              <Linkedin size={30} />
+            </a>
+            <a
+              href="https://leetcode.com/u/jchhabra772/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-400 transition-colors duration-300"
+            >
+              <SiLeetcode size={30} />
+            </a>
+            <a
+              href="mailto:jatin.chhabra772@gmail.com"
+              className="hover:text-blue-400 transition-colors duration-300"
+            >
+              <Mail size={30} />
+            </a>
+            <button
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              className={`p-1 rounded-lg border-2 transition-colors duration-300
+                    ${
+                      isDarkMode
+                        ? "border-yellow-400 hover:border-yellow-300"
+                        : "border-gray-800 hover:border-blue-400"
+                    }`}
+              title={
+                isDarkMode ? "Switch to light mode" : "Switch to dark mode"
+              }
+            >
+              {isDarkMode ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2.5"
+                  stroke="currentColor"
+                  className="w-6 h-6 text-yellow-400"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 3v1.5M12 19.5V21m8.485-8.485h-1.5M4.515 12H3m13.364 7.364l-1.06-1.06M7.697 7.697l-1.06-1.06m0 10.727l1.06-1.06m7.607-7.607l1.06-1.06M12 8.25a3.75 3.75 0 110 7.5 3.75 3.75 0 010-7.5z"
+                  />
                 </svg>
-                ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-6 h-6 text-gray-300">
-                <path d="M21.64 13.65A9 9 0 0110.35 2.36a9 9 0 1011.29 11.29z" />
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  className="w-6 h-6 text-gray-300"
+                >
+                  <path d="M21.64 13.65A9 9 0 0110.35 2.36a9 9 0 1011.29 11.29z" />
                 </svg>
-                )}
+              )}
             </button>
-
           </div>
         </div>
       </header>
@@ -243,20 +319,21 @@ export default function Portfolio() {
         <div>
           <h2
             className={`text-6xl sm:text-7xl font-extrabold mb-6 leading-tight tracking-tight transition-colors duration-500 ${
-                isDarkMode ? "text-blue-400" : "text-blue-600"
+              isDarkMode ? "text-blue-400" : "text-blue-600"
             }`}
           >
             Hi, I'm{" "}
             <span className={isDarkMode ? "text-white" : "text-black"}>
-                Jatin Chhabra
+              Jatin Chhabra
             </span>
           </h2>
           <p
             className={`text-3xl md:text-4xl font-semibold transition-colors duration-500 ${
-            isDarkMode ? "text-gray-300" : "text-gray-700"
+              isDarkMode ? "text-gray-300" : "text-gray-700"
             }`}
           >
-            I'm a <span ref={typedRef} className="text-blue-400 font-semibold"></span>
+            I'm a{" "}
+            <span ref={typedRef} className="text-blue-400 font-semibold"></span>
           </p>
           <a
             href={`${import.meta.env.BASE_URL}JatinChhabra-resume.pdf`}
@@ -268,153 +345,183 @@ export default function Portfolio() {
         </div>
       </section>
 
+      <section className="px-6 py-24 max-w-7xl mx-auto relative z-10 grid md:grid-cols-2 gap-x-24 gap-y-12 items-start">
+        {/* About Section */}
+        <motion.div
+          ref={aboutRef}
+          initial={{ opacity: 0, x: -50 }}
+          animate={
+            isAboutInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }
+          }
+          transition={{ duration: 0.6 }}
+          className="space-y-6"
+        >
+          <h2 className="text-5xl font-bold text-red-400 mb-6">About Me</h2>
+          <p
+            className={`text-lg leading-relaxed transition-colors duration-500 ${
+              isDarkMode ? "text-gray-300" : "text-gray-800"
+            }`}
+          >
+            I'm a passionate software developer with a strong foundation in
+            computer science and hands-on experience building modern web
+            applications. I specialize in crafting scalable, maintainable, and
+            efficient software solutions using technologies like Java, Spring
+            Boot, React, and AWS. With a keen eye for detail and a continuous
+            learning mindset, I strive to write clean, performant code and
+            deliver high-quality user experiences.
+          </p>
+          <p
+            className={`text-lg leading-relaxed transition-colors duration-500 ${
+              isDarkMode ? "text-gray-300" : "text-gray-800"
+            }`}
+          >
+            With over 3 years of professional experience, I have contributed to
+            designing scalable APIs, implementing secure microservices, and
+            developing modern front-end applications using ReactJS. I thrive on
+            solving complex problems, building reliable software, and
+            continuously improving my craft.
+          </p>
+        </motion.div>
 
-    <section className="px-6 py-24 max-w-7xl mx-auto relative z-10 grid md:grid-cols-2 gap-x-24 gap-y-12 items-start">
-  {/* About Section */}
-  <motion.div
-    ref={aboutRef}
-    initial={{ opacity: 0, x: -50 }}
-    animate={isAboutInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-    transition={{ duration: 0.6 }}
-    className="space-y-6"
-  >
-    <h2 className="text-5xl font-bold text-red-400 mb-6">About Me</h2>
-    <p
-        className={`text-lg leading-relaxed transition-colors duration-500 ${
-            isDarkMode ? "text-gray-300" : "text-gray-800"
-        }`}
-    >
-      I'm a passionate software developer with a strong foundation in computer science and hands-on experience building modern web applications. I specialize in crafting scalable, maintainable, and efficient software solutions using technologies like Java, Spring Boot, React, and AWS. With a keen eye for detail and a continuous learning mindset, I strive to write clean, performant code and deliver high-quality user experiences.
-    </p>
-    <p
-        className={`text-lg leading-relaxed transition-colors duration-500 ${
-            isDarkMode ? "text-gray-300" : "text-gray-800"
-        }`}
-    >
-      With 3 years of professional experience, I have contributed to designing scalable APIs, implementing secure microservices, and developing modern front-end applications using ReactJS. I thrive on solving complex problems, building reliable software, and continuously improving my craft.
-    </p>
-  </motion.div>
+        {/* Education Section */}
+        <motion.div
+          ref={educationRef}
+          initial={{ opacity: 0, x: 50 }}
+          animate={
+            isEducationInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }
+          }
+          transition={{ duration: 0.6 }}
+          className="space-y-12"
+        >
+          <h2 className="text-5xl font-bold text-red-400 mb-6">Education</h2>
 
-  {/* Education Section */}
-  <motion.div
-    ref={educationRef}
-    initial={{ opacity: 0, x: 50 }}
-    animate={isEducationInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-    transition={{ duration: 0.6 }}
-    className="space-y-12"
-  >
-    <h2 className="text-5xl font-bold text-red-400 mb-6">Education</h2>
+          <div className="relative border-l-4 border-blue-500 pl-6">
+            <div className="absolute -left-[9px] top-0 w-5 h-5 bg-blue-500 rounded-full"></div>
+            <h3
+              className={`text-xl font-bold mb-1 transition-colors duration-500 ${
+                isDarkMode ? "text-white" : "text-gray-900"
+              }`}
+            >
+              {" "}
+              Concordia University
+            </h3>
+            <p
+              className={`italic mb-1 transition-colors duration-500 ${
+                isDarkMode ? "text-gray-400" : "text-gray-600"
+              }`}
+            >
+              {" "}
+              Sept. 2022 – June 2024
+            </p>
+            <p
+              className={`mb-1 transition-colors duration-500 ${
+                isDarkMode ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
+              {" "}
+              Master's in Applied Computer Science
+            </p>
+            <p
+              className={`transition-colors duration-500 ${
+                isDarkMode ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
+              {" "}
+              Montreal, Quebec, Canada
+            </p>
+          </div>
 
-    <div className="relative border-l-4 border-blue-500 pl-6">
-      <div className="absolute -left-[9px] top-0 w-5 h-5 bg-blue-500 rounded-full"></div>
-      <h3 className={`text-xl font-bold mb-1 transition-colors duration-500 ${
-        isDarkMode ? "text-white" : "text-gray-900"
-        }`}
-      > Concordia University
-      </h3>
-      <p
-        className={`italic mb-1 transition-colors duration-500 ${
-            isDarkMode ? "text-gray-400" : "text-gray-600"
-        }`}
-      > Sept. 2022 – June 2024
-      </p>
-      <p
-        className={`mb-1 transition-colors duration-500 ${
-            isDarkMode ? "text-gray-300" : "text-gray-700"
-        }`}
-      > Master's in Applied Computer Science
-      </p>
-      <p
-        className={`transition-colors duration-500 ${
-            isDarkMode ? "text-gray-300" : "text-gray-700"
-        }`}
-      > Montreal, Quebec, Canada
-      </p>
-    </div>
-
-    <div className="relative border-l-4 border-blue-500 pl-6">
-      <div className="absolute -left-[9px] top-0 w-5 h-5 bg-blue-500 rounded-full"></div>
-      <h3 className={`text-xl font-bold mb-1 transition-colors duration-500 ${
-        isDarkMode ? "text-white" : "text-gray-900"
-        }`}
-      >  Guru Nanak Dev University
-      </h3>
-      <p
-        className={`italic mb-1 transition-colors duration-500 ${
-            isDarkMode ? "text-gray-400" : "text-gray-600"
-        }`}
-      >
-        July 2016 – June 2020
-      </p>
-      <p
-        className={`mb-1 transition-colors duration-500 ${
-            isDarkMode ? "text-gray-300" : "text-gray-700"
-        }`}
-      >
-        Bachelor of Technology in Computer Science and Engineering
-      </p>
-      <p
-        className={`transition-colors duration-500 ${
-            isDarkMode ? "text-gray-300" : "text-gray-700"
-        }`}
-      >
-        Punjab, India
-      </p>
-    </div>
-  </motion.div>
-</section>
+          <div className="relative border-l-4 border-blue-500 pl-6">
+            <div className="absolute -left-[9px] top-0 w-5 h-5 bg-blue-500 rounded-full"></div>
+            <h3
+              className={`text-xl font-bold mb-1 transition-colors duration-500 ${
+                isDarkMode ? "text-white" : "text-gray-900"
+              }`}
+            >
+              {" "}
+              Guru Nanak Dev University
+            </h3>
+            <p
+              className={`italic mb-1 transition-colors duration-500 ${
+                isDarkMode ? "text-gray-400" : "text-gray-600"
+              }`}
+            >
+              July 2016 – June 2020
+            </p>
+            <p
+              className={`mb-1 transition-colors duration-500 ${
+                isDarkMode ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
+              Bachelor of Technology in Computer Science and Engineering
+            </p>
+            <p
+              className={`transition-colors duration-500 ${
+                isDarkMode ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
+              Punjab, India
+            </p>
+          </div>
+        </motion.div>
+      </section>
 
       {/* Experience Section */}
-      <section id="experience" className="px-4 sm:px-6 lg:px-8 py-20 max-w-7xl mx-auto relative z-10">
-  <motion.h2
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: false, amount: 0.3 }}
-    transition={{ duration: 0.6 }}
-    className="text-5xl font-bold text-red-400 mb-12"
-  >
-    Experience
-  </motion.h2>
-
-  <div className="space-y-12">
-    {experienceData.map((exp, i) => (
-      <motion.div
-        key={i}
-        initial={{ opacity: 0, x: -80 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: false, amount: 0.3 }}
-        transition={{ duration: 0.7, ease: "easeOut", delay: i * 0.1 }}
-        className="relative border-l-4 border-blue-500 pl-6"
+      <section
+        id="experience"
+        className="px-4 sm:px-6 lg:px-8 py-20 max-w-7xl mx-auto relative z-10"
       >
-        <div className="absolute -left-[9px] top-0 w-5 h-5 bg-blue-500 rounded-full"></div>
-
-        <h3 className={`text-xl font-bold mb-1 transition-colors duration-500 ${
-            isDarkMode ? "text-white" : "text-gray-900"
-            }`}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+          className="text-5xl font-bold text-red-400 mb-12"
         >
-            {exp.title}
-        </h3>
+          Experience
+        </motion.h2>
 
-        <p className={`text-sm mb-2 italic transition-colors duration-500 ${
-            isDarkMode ? "text-gray-400" : "text-gray-600"
-        }`}
-        >
-            {exp.duration} | {exp.role}
-        </p>
+        <div className="space-y-12">
+          {experienceData.map((exp, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -80 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.7, ease: "easeOut", delay: i * 0.1 }}
+              className="relative border-l-4 border-blue-500 pl-6"
+            >
+              <div className="absolute -left-[9px] top-0 w-5 h-5 bg-blue-500 rounded-full"></div>
 
-        <ul className={`list-disc pl-5 space-y-2 transition-colors duration-500 ${
-            isDarkMode ? "text-gray-300" : "text-gray-700"
-        }`}
-        >
-            {exp.details.map((item, idx) => (
-                <li key={idx}>{item}</li>
-            ))}
-        </ul>
-      </motion.div>
-    ))}
-  </div>
-</section>
+              <h3
+                className={`text-xl font-bold mb-1 transition-colors duration-500 ${
+                  isDarkMode ? "text-white" : "text-gray-900"
+                }`}
+              >
+                {exp.title}
+              </h3>
 
+              <p
+                className={`text-sm mb-2 italic transition-colors duration-500 ${
+                  isDarkMode ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                {exp.duration} | {exp.role}
+              </p>
+
+              <ul
+                className={`list-disc pl-5 space-y-2 transition-colors duration-500 ${
+                  isDarkMode ? "text-gray-300" : "text-gray-700"
+                }`}
+              >
+                {exp.details.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+      </section>
 
       {/* Projects Section */}
       <motion.section
@@ -428,67 +535,86 @@ export default function Portfolio() {
         <h2 className="text-5xl font-bold text-red-400 mb-12">Projects</h2>
 
         <div className="grid md:grid-cols-2 gap-12">
-        {projects.map((project, i) => (
+          {projects.map((project, i) => (
             <motion.div
-            key={i}
-            className={`relative h-80 group rounded-2xl shadow-2xl border overflow-hidden transform transition duration-500 hover:scale-[1.03] ${
+              key={i}
+              className={`relative group rounded-2xl shadow-2xl border overflow-hidden transition-shadow duration-500 ease-in-out ${
                 isDarkMode
-                ? 'border-blue-700 bg-gradient-to-br from-[#000000] to-[#000000] hover:shadow-blue-500/30'
-                : 'border-gray-300 bg-gradient-to-br from-white to-gray-100 hover:shadow-gray-400/30'
-            }`}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: i * 0.1 }}
-            viewport={{ once: true, amount: 0.3 }}
+                  ? "border-blue-700 bg-gradient-to-br from-[#000000] to-[#000000] hover:shadow-blue-500/30"
+                  : "border-gray-300 bg-gradient-to-br from-white to-gray-100 hover:shadow-gray-400/30"
+              }`}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              viewport={{ once: true, amount: 0.3 }}
             >
-            <div className="absolute inset-0 transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
-                <div
-                className={`absolute inset-0 p-6 backface-hidden overflow-hidden ${
-                    isDarkMode ? '' : 'text-gray-800'
-                }`}
+              <div className="p-6">
+                {/* Project title & tech */}
+                <h3
+                  className={`text-2xl font-bold mb-4 flex items-center gap-2 ${
+                    isDarkMode ? "text-white" : "text-black"
+                  }`}
                 >
-                <h3 className={`text-2xl font-bold mb-2 flex items-center gap-2 ${isDarkMode ? 'text-white' : 'text-black'}`}>
-                    {project.title}
-                    {project.tech.map(tech => (
+                  {project.title}
+                  {project.tech.map((tech) => (
                     <img
-                        key={tech}
-                        src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${tech}/${tech}-original.svg`}
-                        alt={tech}
-                        className="h-6 w-6"
+                      key={tech}
+                      src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${tech}/${tech}-original.svg`}
+                      alt={tech}
+                      className="h-6 w-6"
                     />
-                    ))}
+                  ))}
                 </h3>
-                <ul className={`list-disc list-inside space-y-3 text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                    {project.details.map((detail, j) => (
-                    <li key={j} className="truncate hover:whitespace-normal">{detail}</li>
-                    ))}
-                </ul>
-                </div>
-                <div
-                className={`absolute inset-0 text-center flex flex-col items-center justify-center backface-hidden [transform:rotateY(180deg)] ${
-                    isDarkMode ? 'bg-black/80' : 'bg-white/80'
-                }`}
+
+                {/* Project description with smooth expansion */}
+                <ul
+                  className={`list-disc list-inside space-y-3 text-lg overflow-visible max-h-full md:overflow-hidden md:max-h-24 md:group-hover:max-h-[1000px] md:transition-[max-height] md:duration-1000 md:ease-in-out ${isDarkMode ? "text-gray-300" : "text-gray-700"}`}
                 >
-                    <motion.a
+                  {project.details.map((detail, j) => (
+                    <li key={j} className="whitespace-normal">
+                      {detail}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Buttons */}
+                <div className="mt-6 flex flex-wrap gap-4">
+                  <motion.a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className={`px-6 py-3 rounded-lg font-semibold shadow-lg transition duration-300 ${
-                        isDarkMode
-                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                        : 'bg-blue-500 hover:bg-blue-600 text-white' // text is always white
+                      isDarkMode
+                        ? "bg-blue-600 hover:bg-blue-700 text-white"
+                        : "bg-blue-500 hover:bg-blue-600 text-white"
                     }`}
-                    >
+                  >
                     View Code on GitHub
-                    </motion.a>
-                </div>
-            </div>
-            </motion.div>
-        ))}
-        </div>
+                  </motion.a>
 
+                  {project.demo && (
+                    <motion.a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`px-6 py-3 rounded-lg font-semibold shadow-lg transition duration-300 ${
+                        isDarkMode
+                          ? "bg-green-600 hover:bg-green-700 text-white"
+                          : "bg-green-500 hover:bg-green-600 text-white"
+                      }`}
+                    >
+                      Live Demo
+                    </motion.a>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </motion.section>
 
       {/* Skills Section */}
@@ -497,30 +623,38 @@ export default function Portfolio() {
         <div className="grid md:grid-cols-2 gap-x-16 gap-y-6">
           {skills.map((skill, i) => (
             <div key={i} className="flex justify-between items-center">
-              <span className={`text-lg font-medium w-48 ${
-                isDarkMode ? "text-white" : "text-gray-900"
+              <span
+                className={`text-lg font-medium w-48 ${
+                  isDarkMode ? "text-white" : "text-gray-900"
                 }`}
               >
                 {skill.label}
               </span>
               <div className="flex-1 ml-4">
                 <div
-                    className={`relative w-full h-3 rounded-full overflow-hidden border border-black ${
-                    !isDarkMode ? 'bg-white' : 'bg-gray-700'
-                    }`}
+                  className={`relative w-full h-3 rounded-full overflow-hidden border border-black ${
+                    !isDarkMode ? "bg-white" : "bg-gray-700"
+                  }`}
                 >
-                    <motion.div
+                  <motion.div
                     initial={{ width: 0 }}
-                    animate={isSkillsInView ? { width: `${skill.percent}%` } : {}}
-                    transition={{ duration: 1.5, ease: "easeOut", delay: i * 0.1 }}
+                    animate={
+                      isSkillsInView ? { width: `${skill.percent}%` } : {}
+                    }
+                    transition={{
+                      duration: 1.5,
+                      ease: "easeOut",
+                      delay: i * 0.1,
+                    }}
                     className={`absolute top-0 left-0 h-3 rounded-full ${
-                        !isDarkMode ? 'bg-blue-700' : 'bg-blue-500'
+                      !isDarkMode ? "bg-blue-700" : "bg-blue-500"
                     }`}
-                    ></motion.div>
+                  ></motion.div>
                 </div>
               </div>
-              <span className={`ml-4 text-sm font-semibold ${
-                isDarkMode ? "text-gray-300" : "text-gray-800"
+              <span
+                className={`ml-4 text-sm font-semibold ${
+                  isDarkMode ? "text-gray-300" : "text-gray-800"
                 }`}
               >
                 {skill.percent}%
@@ -543,14 +677,19 @@ export default function Portfolio() {
             <h2 className="text-4xl sm:text-5xl font-bold text-red-400 mb-6">
               Get in Touch
             </h2>
-            <p className={`text-xl mb-8 transition-colors duration-500 ${
+            <p
+              className={`text-xl mb-8 transition-colors duration-500 ${
                 isDarkMode ? "text-gray-300" : "text-gray-800"
-                }`}
+              }`}
             >
-                Have a project in mind or want to discuss potential opportunities? I'd love to hear from you!
+              Have a project in mind or want to discuss potential opportunities?
+              I'd love to hear from you!
             </p>
             <motion.button
-              whileHover={{ scale: 1.05, boxShadow: "0 5px 15px rgba(37, 99, 235, 0.4)" }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 5px 15px rgba(37, 99, 235, 0.4)",
+              }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setShowModal(true)}
               className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium text-lg transition-all duration-300"
@@ -563,7 +702,7 @@ export default function Portfolio() {
 
       {/* Contact Modal */}
       {showModal && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -580,7 +719,7 @@ export default function Portfolio() {
             <div className="p-6">
               <div className="flex justify-between items-center mb-6">
                 <h3 className="text-2xl font-bold text-blue-400">Contact Me</h3>
-                <button 
+                <button
                   onClick={() => setShowModal(false)}
                   className="text-gray-400 hover:text-white"
                 >
@@ -589,7 +728,9 @@ export default function Portfolio() {
               </div>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label htmlFor="name" className="block text-gray-300 mb-2">Name</label>
+                  <label htmlFor="name" className="block text-gray-300 mb-2">
+                    Name
+                  </label>
                   <input
                     type="text"
                     id="name"
@@ -601,7 +742,9 @@ export default function Portfolio() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-gray-300 mb-2">Email</label>
+                  <label htmlFor="email" className="block text-gray-300 mb-2">
+                    Email
+                  </label>
                   <input
                     type="email"
                     id="email"
@@ -613,7 +756,9 @@ export default function Portfolio() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-gray-300 mb-2">Message</label>
+                  <label htmlFor="message" className="block text-gray-300 mb-2">
+                    Message
+                  </label>
                   <textarea
                     id="message"
                     name="message"
@@ -652,11 +797,13 @@ export default function Portfolio() {
       {/* Footer */}
       <footer className="py-8 text-center">
         <div className="container mx-auto px-6">
-          <p className={`transition-colors duration-500 ${
-            isDarkMode ? "text-gray-400" : "text-gray-700"
+          <p
+            className={`transition-colors duration-500 ${
+              isDarkMode ? "text-gray-400" : "text-gray-700"
             }`}
-            >
-                &copy; {new Date().getFullYear()} [Jatin Chhabra]. All rights reserved.
+          >
+            &copy; {new Date().getFullYear()} [Jatin Chhabra]. All rights
+            reserved.
           </p>
         </div>
       </footer>
