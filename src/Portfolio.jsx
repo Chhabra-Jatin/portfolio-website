@@ -121,6 +121,20 @@ export default function Portfolio() {
 
   const projects = [
     {
+      title: "BookVault",
+      tech: ["react", "nodejs", "express"],
+      demo: "https://bookvault-cj.netlify.app/",
+      github: "https://github.com/Chhabra-Jatin/bookvault",
+      details: [
+        "Developed BookVault, a full-stack web application with a React frontend and Node.js/Express backend, featuring real-time data fetching from a JSON-based database.",
+        "Handled secure configuration with environment variables and configured CORS for safe frontend–backend communication.",
+        "Implemented RESTful APIs with authentication and authorization using json-server-auth, enabling secure management of products, featured items, orders, and users.",
+        "Deployed frontend on Netlify and backend on Render, ensuring seamless integration across environments with proper CORS handling and environment variable management.",
+        "Implemented dynamic product filtering and sorting (price, rating, bestseller, in-stock) using React Context and Reducer for real-time UI updates.",
+        "Built dynamic search, product listing, and featured products functionality with live API calls, enabling a smooth and interactive user experience."
+      ],
+    },
+    {
       title: "BlogPost",
       tech: ["react", "redux", "firebase"],
       demo: "https://shareyourblogs.netlify.app/",
@@ -561,7 +575,7 @@ export default function Portfolio() {
                       key={tech}
                       src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${tech}/${tech}-original.svg`}
                       alt={tech}
-                      className="h-6 w-6"
+                      className="h-6 w-6 filter invert"
                     />
                   ))}
                 </h3>
