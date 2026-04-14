@@ -93,7 +93,7 @@ export default function Portfolio() {
   const experienceData = [
     {
       title: "Cognizant",
-      duration: "Dec. 2020 – Aug. 2022",
+      duration: "Dec. 2020 – Aug. 2024",
       role: "Software Developer",
       details: [
         "Built and maintained RESTful API endpoints using Java, Spring Boot, and Spring Data JPA, enabling seamless data exchange across microservices, improving data processing speed by 40%.",
@@ -129,9 +129,9 @@ export default function Portfolio() {
         "Developed BookVault, a full-stack web application with a React frontend and Node.js/Express backend, featuring real-time data fetching from a JSON-based database.",
         "Handled secure configuration with environment variables and configured CORS for safe frontend–backend communication.",
         "Implemented RESTful APIs with authentication and authorization using json-server-auth, enabling secure management of products, featured items, orders, and users.",
-        "Deployed frontend on Netlify and backend on Render, ensuring seamless integration across environments with proper CORS handling and environment variable management.",
-        "Implemented dynamic product filtering and sorting (price, rating, bestseller, in-stock) using React Context and Reducer for real-time UI updates.",
-        "Built dynamic search, product listing, and featured products functionality with live API calls, enabling a smooth and interactive user experience."
+        // "Deployed frontend on Netlify and backend on Render, ensuring seamless integration across environments with proper CORS handling and environment variable management.",
+        // "Implemented dynamic product filtering and sorting (price, rating, bestseller, in-stock) using React Context and Reducer for real-time UI updates.",
+        // "Built dynamic search, product listing, and featured products functionality with live API calls, enabling a smooth and interactive user experience."
       ],
     },
     {
@@ -143,9 +143,9 @@ export default function Portfolio() {
         "Built a full-stack blogging application using React and Firebase Firestore with real-time data synchronization.",
         "Implemented Google Authentication with Firebase Auth for secure login/logout and user-specific actions.",
         "Designed Create, Edit, and Delete post functionality with role-based access (only authors can modify their posts).",
-        "Developed a Like/Dislike system with per-user tracking, live counters, and instant UI updates using optimistic rendering.",
         "Enabled real-time updates across users using Firestore onSnapshot, eliminating manual refreshes.",
-        "Added advanced post sorting (Newest, Oldest, Most Liked) with stable tie-break logic for consistent UX."
+        // "Developed a Like/Dislike system with per-user tracking, live counters, and instant UI updates using optimistic rendering.",
+        // "Added advanced post sorting (Newest, Oldest, Most Liked) with stable tie-break logic for consistent UX."
       ],
     },
     {
@@ -389,7 +389,7 @@ export default function Portfolio() {
               isDarkMode ? "text-gray-300" : "text-gray-800"
             }`}
           >
-            With over 3 years of professional experience, I have contributed to
+            With over 5 years of professional experience, I have contributed to
             designing scalable APIs, implementing secure microservices, and
             developing modern front-end applications using ReactJS. I thrive on
             solving complex problems, building reliable software, and
