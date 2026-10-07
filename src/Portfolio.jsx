@@ -93,7 +93,7 @@ export default function Portfolio() {
   const experienceData = [
     {
       title: "Cognizant",
-      duration: "Dec. 2020 – Aug. 2024",
+      duration: "Dec. 2020 – Aug. 2022",
       role: "Software Developer",
       details: [
         "Built and maintained RESTful API endpoints using Java, Spring Boot, and Spring Data JPA, enabling seamless data exchange across microservices, improving data processing speed by 40%.",
