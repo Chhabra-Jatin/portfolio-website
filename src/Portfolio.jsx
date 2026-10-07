@@ -389,7 +389,7 @@ export default function Portfolio() {
               isDarkMode ? "text-gray-300" : "text-gray-800"
             }`}
           >
-            With over 5 years of professional experience, I have contributed to
+            With over 3 years of professional experience, I have contributed to
             designing scalable APIs, implementing secure microservices, and
             developing modern front-end applications using ReactJS. I thrive on
             solving complex problems, building reliable software, and
